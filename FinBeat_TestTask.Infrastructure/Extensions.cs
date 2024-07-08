@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
+using Serilog;
 
 namespace FinBeat_TestTask.Infrastructure
 {
@@ -22,7 +23,12 @@ namespace FinBeat_TestTask.Infrastructure
                     sqlOpts => sqlOpts.MigrationsAssembly(typeof(AppDbContext).GetTypeInfo().Assembly.GetName().Name))
             );
 
+            services.AddSerilog((services, lc) => lc
+                .ReadFrom.Configuration(configuration)
+                .WriteTo.Console());
+
             services.AddScoped<IItemRepository, ItemRepository>();
+            services.AddTransient<RequestLoggerMiddleware>();
 
             services.AddCors(opts => { opts.AddDefaultPolicy(p => p.WithOrigins("*")); });
             services.AddResponseCaching();
@@ -40,7 +46,7 @@ namespace FinBeat_TestTask.Infrastructure
             app.UseResponseCaching();
 
             app.UseMiddleware<ErrorHandlerMiddleware>();
-            //app.UseMiddleware<RequestLoggerMiddleware>();
+            app.UseMiddleware<RequestLoggerMiddleware>();
 
             return app;
         }

@@ -363,3 +363,6 @@ MigrationBackup/
 FodyWeavers.xsd
 /FinBeat_TestTask.Infrastructure/DataBase/localDB.db-shm
 /FinBeat_TestTask.Infrastructure/DataBase/localDB.db-wal
+/FinBeat_TestTask.API/localDB.db
+/FinBeat_TestTask.API/localDB.db-shm
+/FinBeat_TestTask.API/localDB.db-wal

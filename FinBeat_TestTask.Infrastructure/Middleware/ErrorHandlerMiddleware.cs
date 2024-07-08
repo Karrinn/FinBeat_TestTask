@@ -1,7 +1,6 @@
 ﻿using FinBeat_TestTask.Application.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using System.Net;
 using System.Text.Json;
 
 namespace FinBeat_TestTask.Infrastructure.Middleware
@@ -31,12 +30,12 @@ namespace FinBeat_TestTask.Infrastructure.Middleware
                 ExceptionResponse exResponse = e switch
                 {
                     // Customize exception here
-                    AppException ex => new ExceptionResponse(HttpStatusCode.BadRequest, ex.Code, ex.Message),
-                    _ => new ExceptionResponse(HttpStatusCode.BadRequest, "unexpected_error")
+                    AppException ex => new ExceptionResponse(StatusCodes.Status400BadRequest, ex.Code, ex.Message),
+                    _ => new ExceptionResponse(StatusCodes.Status400BadRequest, "unexpected_error")
                 };
 
                 var jsonResponse = JsonSerializer.Serialize(new { code = exResponse.Code, message = exResponse.Reason });
-                context.Response.StatusCode = (int)exResponse.StatusCode;
+                context.Response.StatusCode = exResponse.StatusCode;
                 context.Response.ContentType = "application/json";
                 await context.Response.WriteAsync(jsonResponse);
             }
