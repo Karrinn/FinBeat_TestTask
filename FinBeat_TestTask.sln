@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33829.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinBeat_TestTask.Domain", "..\FinBeat\FinBeat_TestTask.Domain\FinBeat_TestTask.Domain.csproj", "{FCDD0B96-9AA6-4509-9C5A-84B3B4EB6EA9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinBeat_TestTask.Application", "..\FinBeat\FinBeat_TestTask.Application\FinBeat_TestTask.Application.csproj", "{907AF4F8-590D-4570-BE35-55623827786B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FCDD0B96-9AA6-4509-9C5A-84B3B4EB6EA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCDD0B96-9AA6-4509-9C5A-84B3B4EB6EA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCDD0B96-9AA6-4509-9C5A-84B3B4EB6EA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCDD0B96-9AA6-4509-9C5A-84B3B4EB6EA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{907AF4F8-590D-4570-BE35-55623827786B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{907AF4F8-590D-4570-BE35-55623827786B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{907AF4F8-590D-4570-BE35-55623827786B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{907AF4F8-590D-4570-BE35-55623827786B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B036C5AF-DAE1-4B76-A02E-3AA7BAD947AD}
+	EndGlobalSection
+EndGlobal
