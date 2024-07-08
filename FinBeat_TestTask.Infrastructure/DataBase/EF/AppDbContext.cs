@@ -8,16 +8,16 @@ namespace FinBeat_TestTask.Infrastructure.DataBase.EF
     {
         public DbSet<Item> Items => Set<Item>();
 
-
         public AppDbContext(DbContextOptions options) : base(options) 
-        { 
+        {
+            Database.EnsureCreated();
         }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.ApplyConfiguration(new ItemEntityConfiguration());
-
         }
     }
 }

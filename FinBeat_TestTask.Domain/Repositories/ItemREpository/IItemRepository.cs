@@ -9,7 +9,7 @@ namespace FinBeat_TestTask.Domain.Repositories.ItemRepository
         /// </summary>
         /// <param name="filter"></param>
         /// <returns></returns>
-        Task<IList<Item>> GetListAsync(ItemFilter filter, CancellationToken ct);
+        Task<IEnumerable<Item>> GetListAsync(ItemFilter filter, CancellationToken ct);
 
         /// <summary>
         /// Сохранить данные

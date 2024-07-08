@@ -1,4 +1,5 @@
 ﻿using FinBeat_TestTask.Application.DTO.Item;
+using FinBeat_TestTask.Application.Requests;
 using FinBeat_TestTask.Domain.Entities.Item;
 
 namespace FinBeat_TestTask.Application
@@ -15,12 +16,22 @@ namespace FinBeat_TestTask.Application
             };
         }
 
-        public static ItemFilterDTO AsFilterDTO(this ItemFilter entity) 
+        public static IEnumerable<Item> AsEntity(this IEnumerable<SaveItemsRequest> items)
         {
-            return new ItemFilterDTO
+            return items.Select(item => new Item
+                {
+                    Id = item.Id,
+                    Code = item.Code,
+                    Value = item.Value
+                });
+        }
+
+        public static ItemFilter AsEntity(this GetItemsRequest item) 
+        {
+            return new ItemFilter
             {
-                Code = entity.Code,
-                Value = entity.Value
+                Code = item.Code,
+                Value = item.Value
             };
         }
     }
