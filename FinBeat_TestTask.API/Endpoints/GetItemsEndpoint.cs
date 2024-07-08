@@ -1,21 +1,21 @@
 ﻿using FastEndpoints;
 using FinBeat_TestTask.Application.Requests;
-using FinBeat_TestTask.Application.Services.Item;
+using FinBeat_TestTask.Application.Services.Interfaces.Item;
 
 namespace FinBeat_TestTask.API.Endpoints
 {
     public class GetItemsEndpoint : Endpoint<GetItemsRequest>
     {
-        private readonly ItemService _itemService;
+        private readonly IItemService _itemService;
 
-        public GetItemsEndpoint(ItemService itemService)
+        public GetItemsEndpoint(IItemService itemService)
         {
             _itemService = itemService;
         }
 
         public override void Configure()
         {
-            Post("/items");
+            Get("/items");
             AllowAnonymous();
         }
 

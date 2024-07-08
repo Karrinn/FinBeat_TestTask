@@ -1,15 +1,14 @@
 ﻿using FastEndpoints;
-using FinBeat_TestTask.Application;
 using FinBeat_TestTask.Application.Requests;
-using FinBeat_TestTask.Application.Services.Item;
+using FinBeat_TestTask.Application.Services.Interfaces.Item;
 
 namespace FinBeat_TestTask.API.Endpoints
 {
     public class SaveItemsEndpoint : Endpoint<IEnumerable<SaveItemsRequest>>
     {
-        private readonly ItemService _itemService;
+        private readonly IItemService _itemService;
 
-        public SaveItemsEndpoint(ItemService itemService)
+        public SaveItemsEndpoint(IItemService itemService)
         {
             _itemService = itemService;
         }
