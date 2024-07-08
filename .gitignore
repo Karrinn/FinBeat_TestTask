@@ -361,3 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/FinBeat_TestTask.Infrastructure/DataBase/localDB.db-shm
+/FinBeat_TestTask.Infrastructure/DataBase/localDB.db-wal
