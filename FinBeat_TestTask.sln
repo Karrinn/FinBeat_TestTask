@@ -7,9 +7,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinBeat_TestTask.Domain", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinBeat_TestTask.Application", "FinBeat_TestTask.Application\FinBeat_TestTask.Application.csproj", "{907AF4F8-590D-4570-BE35-55623827786B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinBeat_TestTask.Infrastructure", "FinBeat_TestTask.Infrastructure\FinBeat_TestTask.Infrastructure.csproj", "{5B557F63-6E5D-4C9A-B84D-CB72C752A089}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinBeat_TestTask.Infrastructure", "FinBeat_TestTask.Infrastructure\FinBeat_TestTask.Infrastructure.csproj", "{5B557F63-6E5D-4C9A-B84D-CB72C752A089}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinBeat_TestTask.API", "FinBeat_TestTask.API\FinBeat_TestTask.API.csproj", "{453FCB21-65F0-47E9-90AA-C594E70E0CC7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinBeat_TestTask.API", "FinBeat_TestTask.API\FinBeat_TestTask.API.csproj", "{453FCB21-65F0-47E9-90AA-C594E70E0CC7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionFiles", "SolutionFiles", "{080926CA-84AE-45EA-B1A2-E39CF67273AF}"
+	ProjectSection(SolutionItems) = preProject
+		efInitialMigration.ps1 = efInitialMigration.ps1
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

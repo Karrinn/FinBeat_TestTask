@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FinBeat_TestTask.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240708143329_initialMigration")]
+    [Migration("20240708152225_initialMigration")]
     partial class initialMigration
     {
         /// <inheritdoc />
