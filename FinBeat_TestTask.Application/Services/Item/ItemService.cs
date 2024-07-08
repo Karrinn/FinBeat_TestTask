@@ -16,16 +16,20 @@ namespace FinBeat_TestTask.Application.Services.Item
 
         public async Task<IEnumerable<ItemDTO>> GetListAsync(GetItemsRequest filter, CancellationToken ct)
         {
-            var result = await _itemRepository.GetListAsync(filter.AsEntity(), ct);
-
-            return result
-                .Select(i => i.AsDTO())
-                .ToList();
+            var data = await _itemRepository
+                .GetListAsync(filter.AsEntity(), ct);
+         
+            return data.Select(x => x.AsDTO());
         }
 
         public async Task SaveAsync(IEnumerable<SaveItemsRequest> items, CancellationToken ct)
         {
-            await _itemRepository.SaveAsync(items.AsEntity(), ct);
+            var orderedData = items
+                .AsEntity()
+                .OrderBy(ob => ob.Code)
+                .ToList();
+
+            await _itemRepository.SaveAsync(orderedData, ct);
         }
     }
 }

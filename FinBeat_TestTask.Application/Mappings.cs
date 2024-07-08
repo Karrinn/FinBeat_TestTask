@@ -20,8 +20,7 @@ namespace FinBeat_TestTask.Application
         {
             return items.Select(item => new Item
                 {
-                    Id = item.Id,
-                    Code = item.Code,
+                    Code = int.Parse(item.Code), //todo parse json
                     Value = item.Value
                 });
         }

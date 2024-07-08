@@ -16,13 +16,18 @@ namespace FinBeat_TestTask.Infrastructure.Repositories.EF
 
         public async Task<IEnumerable<Item>> GetListAsync(ItemFilter filter, CancellationToken ct)
         {
-            var data = await _dbContext
+            var query = _dbContext
                 .Items
-                .Where(w => w.Code.Equals(filter.Code) && w.Value.Equals(filter.Value))
                 .AsNoTracking()
-                .ToListAsync(ct);
+                .AsQueryable();
 
-            return data;
+            if (filter.Code.HasValue)
+                query = query.Where(x => x.Code == filter.Code);
+
+            if (!string.IsNullOrEmpty(filter.Value))
+                query = query.Where(x => x.Value.Contains(filter.Value));
+
+            return await query.ToListAsync(ct);
         }
 
         public async Task SaveAsync(IEnumerable<Item> items, CancellationToken ct)

@@ -2,7 +2,7 @@
 
 namespace FinBeat_TestTask.Domain.Repositories.ItemRepository
 {
-    public interface IItemRepository
+    public interface IItemRepository 
     {
         /// <summary>
         /// Получить данные, с возможностью применения фильтра
