@@ -31,5 +31,9 @@ namespace FinBeat_TestTask.Application.Services.Item
 
             await _itemRepository.SaveAsync(orderedData, ct);
         }
+        public async Task DeleteAllAsync(CancellationToken ct)
+        {
+            await _itemRepository.DeleteAllAsync(ct);
+        }
     }
 }

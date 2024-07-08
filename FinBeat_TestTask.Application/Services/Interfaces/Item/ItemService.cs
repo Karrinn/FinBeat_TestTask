@@ -8,5 +8,7 @@ namespace FinBeat_TestTask.Application.Services.Interfaces.Item
         Task<IEnumerable<ItemDTO>> GetListAsync(GetItemsRequest filter, CancellationToken ct);
 
         Task SaveAsync(IEnumerable<SaveItemsRequest> items, CancellationToken ct);
+
+        Task DeleteAllAsync(CancellationToken ct);
     }
 }

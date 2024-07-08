@@ -31,7 +31,9 @@ namespace FinBeat_TestTask.API.Endpoints
                 })
                 .ToList();
 
+            await _itemService.DeleteAllAsync(ct);
             await _itemService.SaveAsync(data, ct);
+
             await SendOkAsync(ct);
         }
 
