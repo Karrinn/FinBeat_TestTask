@@ -26,7 +26,7 @@ namespace FinBeat_TestTask.Application
                 .ToList();
         }
 
-        public static ItemFilter AsEntity(this GetItemsRequest item) 
+        public static ItemFilter AsEntity(this GetItemsRequest item)
         {
             return new ItemFilter
             {

@@ -5,7 +5,7 @@ namespace FinBeat_TestTask.Application.Services.Interfaces
 {
     public interface IItemService
     {
-        Task<IEnumerable<ItemResponse>> GetListAsync(GetItemsRequest filter, CancellationToken ct);
+        Task<List<ItemResponse>> GetListAsync(GetItemsRequest filter, CancellationToken ct);
 
         Task SaveAsync(IEnumerable<SaveItemsRequest> items, CancellationToken ct);
 
