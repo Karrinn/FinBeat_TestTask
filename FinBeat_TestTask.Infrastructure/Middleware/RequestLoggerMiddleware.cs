@@ -1,32 +1,37 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.Extensions.Logging;
-using System.Text.Json;
 
 namespace FinBeat_TestTask.Infrastructure.Middleware
 {
-    public class RequestLoggerMiddleware : IMiddleware
+    public class RequestLoggerMiddleware
     {
+        private readonly RequestDelegate _next;
         private readonly ILogger<RequestLoggerMiddleware> _logger;
 
-        public RequestLoggerMiddleware(ILogger<RequestLoggerMiddleware> dbLogger)
+        public RequestLoggerMiddleware(RequestDelegate next, ILogger<RequestLoggerMiddleware> logger)
         {
-            _logger = dbLogger;
+            _next = next;
+            _logger = logger;
         }
 
-        public async Task InvokeAsync(HttpContext context, RequestDelegate next)
+        public async Task Invoke(HttpContext context)
         {
-            try
-            {
-                //var jsonRequest = JsonSerializer.Serialize(context.Request.Body); //todo error here!
-                _logger.LogInformation("incomeing request");
+            var requestBodyStream = new MemoryStream();
+            var originalRequestBody = context.Request.Body;
 
-                await next(context);
-            }
-            finally
-            {
-                //var jsonResponse = JsonSerializer.Serialize(context.Response.Body);
-                _logger.LogInformation("outgoing response");
-            }
+            await context.Request.Body.CopyToAsync(requestBodyStream);
+            requestBodyStream.Seek(0, SeekOrigin.Begin);
+
+            var url = UriHelper.GetDisplayUrl(context.Request);
+            var requestBodyText = new StreamReader(requestBodyStream).ReadToEnd();
+            _logger.Log(LogLevel.Information, 1, $"REQUEST METHOD: {context.Request.Method}, REQUEST BODY: {requestBodyText}, REQUEST URL: {url}", null, (state, exception) => state);
+
+            requestBodyStream.Seek(0, SeekOrigin.Begin);
+            context.Request.Body = requestBodyStream;
+
+            await _next(context);
+            context.Request.Body = originalRequestBody;
         }
     }
 }

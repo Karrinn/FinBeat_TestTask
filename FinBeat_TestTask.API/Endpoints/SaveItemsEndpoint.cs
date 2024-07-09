@@ -1,6 +1,6 @@
 ﻿using FastEndpoints;
 using FinBeat_TestTask.Application.Requests;
-using FinBeat_TestTask.Application.Services.Interfaces.Item;
+using FinBeat_TestTask.Application.Services.Interfaces;
 
 namespace FinBeat_TestTask.API.Endpoints
 {
@@ -21,8 +21,6 @@ namespace FinBeat_TestTask.API.Endpoints
 
         public override async Task HandleAsync(IEnumerable<Dictionary<string, string>> jsonData, CancellationToken ct)
         {
-            ArgumentNullException.ThrowIfNullOrEmpty(nameof(jsonData));
-            
             var data = jsonData.Select(item =>
                 new SaveItemsRequest
                 {

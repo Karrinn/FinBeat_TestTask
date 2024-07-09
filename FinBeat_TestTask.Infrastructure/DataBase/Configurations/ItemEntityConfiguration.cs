@@ -1,8 +1,8 @@
-﻿using FinBeat_TestTask.Domain.Entities.Item;
+﻿using FinBeat_TestTask.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace FinBeat_TestTask.Infrastructure.DataBase.EF.Configurations
+namespace FinBeat_TestTask.Infrastructure.DataBase.Configurations
 {
     public class ItemEntityConfiguration : IEntityTypeConfiguration<Item>
     {

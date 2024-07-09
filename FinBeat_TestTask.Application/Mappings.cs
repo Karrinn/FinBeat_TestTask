@@ -1,14 +1,14 @@
-﻿using FinBeat_TestTask.Application.DTO.Item;
+﻿using FinBeat_TestTask.Application.Response;
 using FinBeat_TestTask.Application.Requests;
-using FinBeat_TestTask.Domain.Entities.Item;
+using FinBeat_TestTask.Domain.Entities;
 
 namespace FinBeat_TestTask.Application
 {
     public static class Mappings
     {
-        public static ItemDTO AsDTO(this Item entity)
+        public static ItemResponse AsDTO(this Item entity)
         {
-            return new ItemDTO
+            return new ItemResponse
             {
                 Id = entity.Id,
                 Code = entity.Code,
@@ -16,13 +16,14 @@ namespace FinBeat_TestTask.Application
             };
         }
 
-        public static IEnumerable<Item> AsEntity(this IEnumerable<SaveItemsRequest> items)
+        public static List<Item> AsEntity(this IEnumerable<SaveItemsRequest> items)
         {
             return items.Select(item => new Item
                 {
-                    Code = int.Parse(item.Code), //todo parse json
-                    Value = item.Value
-                });
+                    Code = int.Parse(item?.Code ?? "0"),
+                    Value = item?.Value
+                })
+                .ToList();
         }
 
         public static ItemFilter AsEntity(this GetItemsRequest item) 

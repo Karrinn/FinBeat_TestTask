@@ -4,6 +4,7 @@
     <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+	<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
 
   <ItemGroup>
@@ -18,6 +19,10 @@
   <ItemGroup>
     <ProjectReference Include="..\FinBeat_TestTask.Application\FinBeat_TestTask.Application.csproj" />
     <ProjectReference Include="..\FinBeat_TestTask.Infrastructure\FinBeat_TestTask.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Logs\" />
   </ItemGroup>
 
 </Project>

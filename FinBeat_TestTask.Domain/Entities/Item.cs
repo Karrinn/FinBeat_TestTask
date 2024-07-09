@@ -1,4 +1,4 @@
-﻿namespace FinBeat_TestTask.Domain.Entities.Item
+﻿namespace FinBeat_TestTask.Domain.Entities
 {
     public class Item
     {

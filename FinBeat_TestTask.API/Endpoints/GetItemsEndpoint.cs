@@ -1,10 +1,11 @@
 ﻿using FastEndpoints;
 using FinBeat_TestTask.Application.Requests;
-using FinBeat_TestTask.Application.Services.Interfaces.Item;
+using FinBeat_TestTask.Application.Response;
+using FinBeat_TestTask.Application.Services.Interfaces;
 
 namespace FinBeat_TestTask.API.Endpoints
 {
-    public class GetItemsEndpoint : Endpoint<GetItemsRequest>
+    public class GetItemsEndpoint : Endpoint<GetItemsRequest, IEnumerable<ItemResponse>>
     {
         private readonly IItemService _itemService;
 

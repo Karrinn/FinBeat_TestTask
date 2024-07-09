@@ -1,6 +1,6 @@
-﻿namespace FinBeat_TestTask.Application.DTO.Item
+﻿namespace FinBeat_TestTask.Domain.Entities
 {
-    public class ItemFilterDTO
+    public class ItemFilter
     {
         public int? Code { get; set; }
         public string? Value { get; set; }

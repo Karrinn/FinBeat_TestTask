@@ -1,9 +1,9 @@
-﻿using FinBeat_TestTask.Domain.Entities.Item;
-using FinBeat_TestTask.Domain.Repositories.ItemRepository;
-using FinBeat_TestTask.Infrastructure.DataBase.EF;
+﻿using FinBeat_TestTask.Domain.Entities;
+using FinBeat_TestTask.Domain.Repositories;
+using FinBeat_TestTask.Infrastructure.DataBase;
 using Microsoft.EntityFrameworkCore;
 
-namespace FinBeat_TestTask.Infrastructure.Repositories.EF
+namespace FinBeat_TestTask.Infrastructure.Repositories
 {
     public class ItemRepository : IItemRepository
     {
@@ -14,7 +14,7 @@ namespace FinBeat_TestTask.Infrastructure.Repositories.EF
             _dbContext = dbContext;
         }
 
-        public async Task<IEnumerable<Item>> GetListAsync(ItemFilter filter, CancellationToken ct)
+        public async Task<List<Item>> GetListAsync(ItemFilter filter, CancellationToken ct)
         {
             var query = _dbContext
                 .Items
@@ -25,7 +25,7 @@ namespace FinBeat_TestTask.Infrastructure.Repositories.EF
                 query = query.Where(x => x.Code == filter.Code);
 
             if (!string.IsNullOrEmpty(filter.Value))
-                query = query.Where(x => x.Value.Contains(filter.Value));
+                query = query.Where(x => x.Value != null && x.Value.Contains(filter.Value));
 
             return await query.ToListAsync(ct);
         }
@@ -36,19 +36,7 @@ namespace FinBeat_TestTask.Infrastructure.Repositories.EF
                 .Items
                 .AddRangeAsync(items, ct);
 
-            await _dbContext.SaveChangesAsync();
-        }
-
-        public async Task MarkAllAsDeletedAsync(CancellationToken ct)
-        {
-            var notDeleted = await _dbContext
-                .Items
-                .Where(w => !w.IsDeleted).
-                ToListAsync(ct);
-
-            notDeleted.ForEach(i => i.IsDeleted = true);
-
-            await _dbContext.SaveChangesAsync();
+            await _dbContext.SaveChangesAsync(ct);
         }
 
         public async Task DeleteAllAsync(CancellationToken ct)

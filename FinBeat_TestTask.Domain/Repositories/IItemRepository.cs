@@ -1,15 +1,15 @@
-﻿using FinBeat_TestTask.Domain.Entities.Item;
+﻿using FinBeat_TestTask.Domain.Entities;
 
-namespace FinBeat_TestTask.Domain.Repositories.ItemRepository
+namespace FinBeat_TestTask.Domain.Repositories
 {
-    public interface IItemRepository 
+    public interface IItemRepository
     {
         /// <summary>
         /// Получить данные, с возможностью применения фильтра
         /// </summary>
         /// <param name="filter"></param>
         /// <returns></returns>
-        Task<IEnumerable<Item>> GetListAsync(ItemFilter filter, CancellationToken ct);
+        Task<List<Item>> GetListAsync(ItemFilter filter, CancellationToken ct);
 
         /// <summary>
         /// Сохранить данные
@@ -25,11 +25,5 @@ namespace FinBeat_TestTask.Domain.Repositories.ItemRepository
         /// <returns></returns>
         Task DeleteAllAsync(CancellationToken ct);
 
-        /// <summary>
-        /// Удалить данные (физически)
-        /// </summary>
-        /// <param name="items"></param>
-        /// <returns></returns>
-        Task MarkAllAsDeletedAsync(CancellationToken ct);
     }
 }

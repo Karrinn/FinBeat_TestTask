@@ -1,6 +1,6 @@
-﻿namespace FinBeat_TestTask.Application.DTO.Item
+﻿namespace FinBeat_TestTask.Application.Response
 {
-    public class ItemDTO
+    public class ItemResponse
     {
         public int Id { get; set; }
         public int Code { get; set; }

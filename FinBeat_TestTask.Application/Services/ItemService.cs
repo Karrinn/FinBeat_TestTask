@@ -1,24 +1,24 @@
-﻿using FinBeat_TestTask.Application.DTO.Item;
-using FinBeat_TestTask.Application.Requests;
-using FinBeat_TestTask.Application.Services.Interfaces.Item;
-using FinBeat_TestTask.Domain.Repositories.ItemRepository;
+﻿using FinBeat_TestTask.Application.Requests;
+using FinBeat_TestTask.Application.Response;
+using FinBeat_TestTask.Application.Services.Interfaces;
+using FinBeat_TestTask.Domain.Repositories;
 
-namespace FinBeat_TestTask.Application.Services.Item
+namespace FinBeat_TestTask.Application.Services
 {
     public class ItemService : IItemService
     {
         private readonly IItemRepository _itemRepository;
 
-        public ItemService(IItemRepository itemRepository) 
+        public ItemService(IItemRepository itemRepository)
         {
             _itemRepository = itemRepository;
         }
 
-        public async Task<IEnumerable<ItemDTO>> GetListAsync(GetItemsRequest filter, CancellationToken ct)
+        public async Task<IEnumerable<ItemResponse>> GetListAsync(GetItemsRequest filter, CancellationToken ct)
         {
             var data = await _itemRepository
                 .GetListAsync(filter.AsEntity(), ct);
-         
+
             return data.Select(x => x.AsDTO());
         }
 

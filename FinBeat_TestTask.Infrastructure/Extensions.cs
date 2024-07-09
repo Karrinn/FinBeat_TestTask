@@ -1,13 +1,13 @@
-﻿using FinBeat_TestTask.Domain.Repositories.ItemRepository;
-using FinBeat_TestTask.Infrastructure.DataBase.EF;
-using FinBeat_TestTask.Infrastructure.Middleware;
-using FinBeat_TestTask.Infrastructure.Repositories.EF;
+﻿using FinBeat_TestTask.Infrastructure.Middleware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 using Serilog;
+using FinBeat_TestTask.Infrastructure.Repositories;
+using FinBeat_TestTask.Infrastructure.DataBase;
+using FinBeat_TestTask.Domain.Repositories;
 
 namespace FinBeat_TestTask.Infrastructure
 {
@@ -28,7 +28,6 @@ namespace FinBeat_TestTask.Infrastructure
                 .WriteTo.Console());
 
             services.AddScoped<IItemRepository, ItemRepository>();
-            services.AddTransient<RequestLoggerMiddleware>();
 
             services.AddCors(opts => { opts.AddDefaultPolicy(p => p.WithOrigins("*")); });
             services.AddResponseCaching();
@@ -38,15 +37,19 @@ namespace FinBeat_TestTask.Infrastructure
         
         public static IApplicationBuilder UseInfrastructure(this IApplicationBuilder app)
         {
+            app.UseSerilogRequestLogging();
+
             app.UseCors(x =>
                 x.AllowAnyOrigin()
                 .AllowAnyMethod()
                 .AllowAnyHeader());
+
             app.UseHttpsRedirection();
             app.UseResponseCaching();
 
-            app.UseMiddleware<ErrorHandlerMiddleware>();
             app.UseMiddleware<RequestLoggerMiddleware>();
+            app.UseMiddleware<ErrorHandlerMiddleware>();
+            app.UseMiddleware<ResponseLoggerMiddleware>();
 
             return app;
         }
