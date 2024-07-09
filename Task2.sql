@@ -21,6 +21,24 @@ from dbo.[ClientContacts] as cc
 group by c.Id, c.ClientName, cc.ContactValue
 having COUNT(cc.ContactValue) > 2
 
+-- Написать запрос, который возвращает интервалы для одинаковых Id.
+-- Результатом выполнения запроса должен быть такой набор данных:
+-- Id Sd         Ed
+-- 1  01.01.2021 10.01.202
+
+SELECT 
+    T.Id, 
+    min(T.Dt) [Sd],
+    max(T.Dt) [Ed]
+from 
+(
+Select 
+   Id,
+   Dt,
+   ROW_NUMBER() OVER(PARTITION BY Id ORDER BY Dt ASC) AS RN
+FROM Dates
+) T
+GROUP BY T.Id
 
 -- Создание Таблиц и заполенение данных
 
@@ -62,6 +80,11 @@ GO
 ALTER TABLE [dbo].[ClientContacts] CHECK CONSTRAINT [FK_Clients_ClientContacts]
 GO
 
+CREATE TABLE [dbo].[Dates](
+	[Id] [bigint] NOT NULL,
+	[Dt] [date] NOT NULL
+)
+
 INSERT INTO [dbo].[Clients]
            ([Id],[ClientName])
      VALUES
@@ -92,4 +115,15 @@ INSERT INTO [dbo].[ClientContacts]
            (13,4,'Client Type 4','Client Contact Type 4'),
            (14,4,'Client Type 4','Client Contact Type 4'),
            (15,5,'Client Type 5','Client Contact Type 5')
+       
+       
+INSERT INTO [dbo].[Dates]
+           ([Id]
+           ,[Dt])
+     VALUES
+           (1,'01.01.2021'),
+           (1,'10.01.2021'),
+           (1,'30.01.2021'),
+           (2,'15.01.2021'),
+           (2,'30.01.2021')     
        
