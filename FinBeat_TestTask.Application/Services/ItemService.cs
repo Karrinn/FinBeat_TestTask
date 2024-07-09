@@ -14,12 +14,14 @@ namespace FinBeat_TestTask.Application.Services
             _itemRepository = itemRepository;
         }
 
-        public async Task<List<ItemResponse>> GetListAsync(GetItemsRequest filter, CancellationToken ct)
+        public async Task<List<ItemResponse>> GetListAsync(GetItemsRequest? filter, CancellationToken ct)
         {
             var data = await _itemRepository
-                .GetListAsync(filter.AsEntity(), ct);
+                .GetListAsync(filter?.AsEntity(), ct);
 
-            return data.Select(x => x.AsDTO()).ToList();
+            return data
+                .Select(x => x.AsDTO())
+                .ToList();
         }
 
         public async Task SaveAsync(IEnumerable<SaveItemsRequest> items, CancellationToken ct)
@@ -31,6 +33,7 @@ namespace FinBeat_TestTask.Application.Services
 
             await _itemRepository.SaveAsync(orderedData, ct);
         }
+
         public async Task DeleteAllAsync(CancellationToken ct)
         {
             await _itemRepository.DeleteAllAsync(ct);

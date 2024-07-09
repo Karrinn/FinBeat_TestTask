@@ -3,7 +3,6 @@ using FinBeat_TestTask.Application.Services;
 using FinBeat_TestTask.Domain.Repositories;
 using Moq;
 using FinBeat_TestTask.Application.Requests;
-using FinBeat_TestTask.Application;
 
 namespace FinBeat_TestTast.Tests.Application
 {
@@ -23,10 +22,9 @@ namespace FinBeat_TestTast.Tests.Application
                 });
 
             var itemService = new ItemService(repositoryMock.Object);
-            var filter = new GetItemsRequest();
 
             // Act
-            var data = await itemService.GetListAsync(filter, CancellationToken.None);
+            var data = await itemService.GetListAsync(null, CancellationToken.None);
 
             // Assert
             repositoryMock.Verify(r => r.GetListAsync(It.IsAny<ItemFilter>(), CancellationToken.None), Times.Once);

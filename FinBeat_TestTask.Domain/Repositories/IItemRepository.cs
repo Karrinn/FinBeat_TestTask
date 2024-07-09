@@ -7,22 +7,19 @@ namespace FinBeat_TestTask.Domain.Repositories
         /// <summary>
         /// Получить данные, с возможностью применения фильтра
         /// </summary>
-        /// <param name="filter"></param>
-        /// <returns></returns>
-        Task<List<Item>> GetListAsync(ItemFilter filter, CancellationToken ct);
+        /// <param name="filter">Класс для фильтрации результата</param>
+        /// <returns>Список Item'ов</returns>
+        Task<List<Item>> GetListAsync(ItemFilter? filter, CancellationToken ct);
 
         /// <summary>
         /// Сохранить данные
         /// </summary>
-        /// <param name="items"></param>
-        /// <returns></returns>
+        /// <param name="items">Список Item'ов для сохранения в бд</param>
         Task SaveAsync(IEnumerable<Item> items, CancellationToken ct);
 
         /// <summary>
-        /// Удалить данные (физически)
+        /// Удалить все данные
         /// </summary>
-        /// <param name="items"></param>
-        /// <returns></returns>
         Task DeleteAllAsync(CancellationToken ct);
 
     }

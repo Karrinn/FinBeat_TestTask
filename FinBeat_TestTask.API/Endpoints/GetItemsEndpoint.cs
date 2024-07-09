@@ -20,7 +20,7 @@ namespace FinBeat_TestTask.API.Endpoints
             AllowAnonymous();
         }
 
-        public override async Task HandleAsync(GetItemsRequest filter, CancellationToken ct)
+        public override async Task HandleAsync(GetItemsRequest? filter, CancellationToken ct)
         {
             var items = await _itemService.GetListAsync(filter, ct);
             if (items is null)

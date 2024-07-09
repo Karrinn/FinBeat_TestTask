@@ -14,18 +14,21 @@ namespace FinBeat_TestTask.Infrastructure.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task<List<Item>> GetListAsync(ItemFilter filter, CancellationToken ct)
+        public async Task<List<Item>> GetListAsync(ItemFilter? filter, CancellationToken ct)
         {
             var query = _dbContext
                 .Items
                 .AsNoTracking()
                 .AsQueryable();
 
-            if (filter.Code.HasValue)
-                query = query.Where(x => x.Code == filter.Code);
+            if(filter != null)
+            {
+                if (filter.Code.HasValue)
+                    query = query.Where(x => x.Code == filter.Code);
 
-            if (!string.IsNullOrEmpty(filter.Value))
-                query = query.Where(x => x.Value != null && x.Value.Contains(filter.Value));
+                if (!string.IsNullOrEmpty(filter.Value))
+                    query = query.Where(x => x.Value != null && x.Value.Contains(filter.Value));
+            }
 
             return await query.ToListAsync(ct);
         }

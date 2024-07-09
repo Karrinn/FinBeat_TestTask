@@ -10,7 +10,7 @@ namespace FinBeat_TestTask.API.Endpoints
 
         public SaveItemsEndpoint(IItemService itemService)
         {
-            _itemService = itemService;//
+            _itemService = itemService;
         }
 
         public override void Configure()

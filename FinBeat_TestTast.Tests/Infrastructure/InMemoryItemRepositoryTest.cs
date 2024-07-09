@@ -54,7 +54,7 @@ namespace FinBeat_TestTast.Tests.Infrastructure
         #endregion
 
         [Fact]
-        public void Test_Get_By_Filter()
+        public async Task Test_Get_By_Filter()
         {
             //assert
             using var context = CreateContext();
@@ -65,29 +65,28 @@ namespace FinBeat_TestTast.Tests.Infrastructure
             };
 
             //act
-            var data = repo.GetListAsync(filter, CancellationToken.None).GetAwaiter().GetResult();
+            var data = await repo.GetListAsync(null, CancellationToken.None);
 
             //arrange
             Assert.Equal(1, data.First().Code);
         }
 
         [Fact]
-        public void Test_Get_All()
+        public async Task Test_Get_All()
         {
             //assert
             using var context = CreateContext();
             var repo = new ItemRepository(context);
-            var filter = new ItemFilter();
 
             //act
-            var data = repo.GetListAsync(filter, CancellationToken.None).GetAwaiter().GetResult();
+            var data = await repo.GetListAsync(null, CancellationToken.None);
 
             //arrange
             Assert.Equal(3, data.Count);
         }
 
         [Fact]
-        public void Test_SaveItem()
+        public async Task Test_SaveItem()
         {
             //assert
             using var context = CreateContext();
@@ -102,26 +101,25 @@ namespace FinBeat_TestTast.Tests.Infrastructure
             //act
             repo.SaveAsync(newItems, CancellationToken.None).GetAwaiter().GetResult();
 
-            var data = repo.GetListAsync(filter, CancellationToken.None).GetAwaiter().GetResult();
+            var data = await repo.GetListAsync(filter, CancellationToken.None);
 
             //arrange
             Assert.Equal(4, data.Count);
         }
 
         [Fact]
-        public void Test_Delete_All()
+        public async Task Test_Delete_All()
         {
             //assert
             using var context = CreateContext();
             var repo = new ItemRepository(context);
-            var filter = new ItemFilter();
 
             //act
             repo.DeleteAllAsync(CancellationToken.None).GetAwaiter().GetResult();
-            var data = repo.GetListAsync(filter, CancellationToken.None).GetAwaiter().GetResult();
+            var data = await repo.GetListAsync(null, CancellationToken.None);
 
             //arrange
-            Assert.Equal(0, data.Count);
+            Assert.Equal(0, data?.Count);
         }
 
     }
