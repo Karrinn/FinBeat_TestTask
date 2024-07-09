@@ -14,6 +14,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionFiles", "SolutionFiles", "{080926CA-84AE-45EA-B1A2-E39CF67273AF}"
 	ProjectSection(SolutionItems) = preProject
 		efInitialMigration.ps1 = efInitialMigration.ps1
+		Task2.sql = Task2.sql
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinBeat_TestTast.Tests", "FinBeat_TestTast.Tests\FinBeat_TestTast.Tests.csproj", "{D7062037-4280-4180-8BDD-D7A610DA6051}"
