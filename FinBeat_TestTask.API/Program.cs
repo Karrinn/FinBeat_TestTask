@@ -6,9 +6,9 @@ using FinBeat_TestTask.Application;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services
+    .AddApplication()
     .AddInfrastructure(builder.Configuration)
     .AddFastEndpoints()
-    .AddApplication()
     .SwaggerDocument();
 
 var application = builder.Build();
